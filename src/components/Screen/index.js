@@ -22,7 +22,7 @@ class Screen extends Component {
     const { title, children } = this.props;
 
     return (
-      <Container>
+      <Container style={{flex: 1}}>
         <Header
           title={title}
           handleBack={this.handleBack}

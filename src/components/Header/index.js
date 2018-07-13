@@ -20,25 +20,23 @@ const Header = (props) => {
   } = props;
 
   return (
-    <Container>
-      <NativeHeader>
-        <Left>
-          <Button onPress={handleBack} transparent>
-            <Icon name="arrow-back" />
-          </Button>
-        </Left>
-        <Body>
-        <Title>
-          { title }
-        </Title>
-        </Body>
-        <Right>
-          <Button onPress={handleOpenMenu} transparent>
-            <Icon name="menu" />
-          </Button>
-        </Right>
-      </NativeHeader>
-    </Container>
+    <NativeHeader style={styles.container}>
+      <Left>
+        <Button onPress={handleBack} transparent>
+          <Icon name="arrow-back"/>
+        </Button>
+      </Left>
+      <Body>
+      <Title>
+        {title}
+      </Title>
+      </Body>
+      <Right>
+        <Button onPress={handleOpenMenu} transparent>
+          <Icon name="menu"/>
+        </Button>
+      </Right>
+    </NativeHeader>
   );
 };
 

@@ -19,10 +19,8 @@ class FooterNav extends Component {
 
   render() {
     return (
-      <Container>
-        <Content />
         <Footer>
-          <FooterTab>
+          <FooterTab style={styles.container}>
             <Button>
               <Icon name="apps" />
             </Button>
@@ -37,7 +35,6 @@ class FooterNav extends Component {
             </Button>
           </FooterTab>
         </Footer>
-      </Container>
     );
   }
 }

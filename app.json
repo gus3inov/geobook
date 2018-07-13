@@ -1,5 +1,13 @@
 {
   "expo": {
-    "sdkVersion": "25.0.0"
+    "sdkVersion": "25.0.0",
+    "android": {
+      "package": "ca.sport.growlerprowler",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCs_pWmLi3sn572NBh0DK7iA3Yrk86DVuE"
+        }
+      }
+    }
   }
 }
