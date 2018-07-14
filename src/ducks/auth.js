@@ -84,7 +84,6 @@ export const authFetch = () => {
     });
 
     const user = await AuthService.getUser();
-    console.log('authFetch', user)
     dispatch({
       type: SIGN_IN_SUCCESS,
       payload: JSON.parse(user),

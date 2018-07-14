@@ -58,7 +58,6 @@ class Root extends React.PureComponent {
   };
 
   async componentDidMount() {
-
     try {
       await Font.loadAsync({
         Roboto: require("native-base/Fonts/Roboto.ttf"),
@@ -71,7 +70,6 @@ class Root extends React.PureComponent {
       });
       if (await AuthService.isAuth()) {
         let user = JSON.parse(await AuthService.getUser());
-        console.log("userrrr", user.result[0].id);
         await this.register(user.result[0].id);
         this.listener = Expo.Notifications.addListener(this.listen);
         this.setState({

@@ -43,5 +43,4 @@ class Screen extends Component {
 
 export default connect((state, ownProps) => ({
   user: state[moduleName].user,
-  navigation: ownProps.navigation,
 }), { authFetch })(Screen);

@@ -29,7 +29,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <Screen title="Profile" auth={true}>
+      <Screen navigation={this.props.navigaiton} title="Profile" auth={true}>
         <Container style={{ flex: 1 }}>
           <Button onPress={this.logout}>
             <Text>

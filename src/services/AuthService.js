@@ -8,7 +8,6 @@ class AuthService {
 
     static async isAuth() {
         const res = await this.getToken();
-        console.log('token', res !== null)
         return res !== null;
     }
 
