@@ -95,14 +95,14 @@ class Home extends Component {
   openUserList = () => {
     console.log('click')
     this.setState({
-      isOpenUserList: true
+      isOpenUserList: !this.state.isOpenUserList
     })
   }
 
   render() {
     return (
       <Screen handleSos={this.openUserList} title="Home" auth={true}>
-        <UserList isOpen={this.state.isOpenUserList}/>
+        <UserList handleOpen={this.openUserList} isOpen={this.state.isOpenUserList}/>
         <Container style={{ flex: 1 }}>
           {this.getMap()}
         </Container>

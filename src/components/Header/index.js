@@ -44,10 +44,10 @@ const Header = props => {
         </Button>
       </Left>
       <Body>
-        <View onPress={handleSos}>
+        <View>
           <Pulse color="red" />
           <View style={styles.pulseView}>
-            <Button transparent style={styles.pulseButton}>
+            <Button onPress={handleSos} transparent style={styles.pulseButton}>
               <Text style={styles.pulseText}>10</Text>
             </Button>
           </View>

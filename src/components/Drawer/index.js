@@ -162,7 +162,7 @@ export default class Drawer extends Component {
         {/* Backdrop with animated opacity */}
         <Animated.View style={[styles.backdrop, { opacity: animatedOpacity }]}>
           {/* Close window when tapped on header */}
-          <TouchableWithoutFeedback onPress={this.close}>
+          <TouchableWithoutFeedback onPress={this.props.handleOpen}>
             <View style={[styles.header, this.getHeaderStyle()]}>
               {/* Icon */}
               <View style={styles.headerIcon}>

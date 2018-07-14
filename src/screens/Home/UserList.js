@@ -25,9 +25,9 @@ class UserList extends Component {
 
 
   render() {
-    const { isOpen } = this.props 
+    const { isOpen, handleOpen } = this.props 
     return (
-    <Drawer teaserHeight={0} isOpen={isOpen}>
+    <Drawer teaserHeight={0} handleOpen={handleOpen} isOpen={isOpen}>
       <View style={styles.container}>
         <UserItem />
       </View>
