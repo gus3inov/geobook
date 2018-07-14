@@ -55,7 +55,7 @@ export const signIn = (user) => {
       type: SIGN_IN_REQUEST,
       isAuth: false
     });
-    console.log(`${api}/api/login`)
+
     fetch(`${api}/api/login`, {
       method: 'POST',
       headers: {
@@ -64,15 +64,36 @@ export const signIn = (user) => {
       },
       body: JSON.stringify(user)
     }).then(async(res) => {
-
+      const userData = await res.json()
       dispatch({
         type: SIGN_IN_SUCCESS,
-        payload: await res.json(),
+        payload: userData,
       })
-
-      AuthService.authenticateUser('secret123')
+      
+      AuthService.authenticateUser('secret123', userData)
     }).catch(err => {
       console.error(err)
     })
   };
+}
+
+export const authFetch = () => {
+  return async (dispatch) => { 
+    dispatch({
+      type: SIGN_IN_REQUEST,
+    });
+
+    const user = await AuthService.getUser();
+    console.log('authFetch', user)
+    dispatch({
+      type: SIGN_IN_SUCCESS,
+      payload: JSON.parse(user),
+    })
+
+    if(user === null) {
+      dispatch({
+        type: SIGN_IN_ERROR,
+      })
+    }
+  }
 }

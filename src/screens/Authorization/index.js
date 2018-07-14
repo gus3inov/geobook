@@ -10,6 +10,7 @@ import styles from './styles';
 class Authorization extends Component {
   handleLogin = (values) => {
     this.props.signIn(values);
+    this.props.navigation.navigate('HomeScreen')
   }
 
   render() {
@@ -30,9 +31,10 @@ class Authorization extends Component {
   }
 }
 
-export default connect(state => {
+export default connect((state, ownProps) => {
   return {
       isAuth: state[moduleName].isAuth,
-      loading: state[moduleName].loading
+      loading: state[moduleName].loading,
+      navigation: ownProps.navigation,
   };
 }, { signIn })(Authorization);

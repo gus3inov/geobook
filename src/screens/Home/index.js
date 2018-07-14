@@ -8,7 +8,9 @@ import {
   Container,
   Text,
 } from 'native-base';
+import { connect } from 'react-redux';
 import { MapView } from 'expo'
+import { moduleName } from '../../ducks/auth'
 import Screen from '../../components/Screen';
 
 class Home extends Component {
@@ -21,6 +23,7 @@ class Home extends Component {
   }
 
   componentDidMount () {
+    console.log('user', this.props.user)
     return new Promise((resolve) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -73,7 +76,7 @@ class Home extends Component {
     const {latitude, longitude, mapLoaded} = this.state
 
     if (mapLoaded) {
-      return (
+      return ( 
         <View>
           <MapView.Marker
             coordinate={{
@@ -98,4 +101,6 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default connect((state) => ({
+  user: state[moduleName].user
+}), {})(Home);

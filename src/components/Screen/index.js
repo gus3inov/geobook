@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Content, Container } from 'native-base';
 import FooterNav from '../FooterNav'
 import Header from '../Header'
+import { connect } from 'react-redux';
+import { moduleName, authFetch } from '../../ducks/auth'
 
 class Screen extends Component {
   static propTypes = {};
 
   componentDidMount() {
-
+      this.props.authFetch()
   }
 
   handleBack = () => {
@@ -38,4 +40,4 @@ class Screen extends Component {
   }
 }
 
-export default Screen;
+export default connect(null, { authFetch })(Screen);
