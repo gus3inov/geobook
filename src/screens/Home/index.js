@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { MapView } from 'expo'
 import { moduleName } from '../../ducks/auth'
 import Screen from '../../components/Screen';
+import UserList from './UserList';
 
 class Home extends Component {
   state = {
@@ -19,7 +20,8 @@ class Home extends Component {
     longitude: null,
     mapLoaded: false,
     defLocation: true,
-    geoDistance: 1
+    geoDistance: 1,
+    isOpenUserList: false
   }
 
   componentDidMount () {
@@ -90,9 +92,17 @@ class Home extends Component {
     }
   }
 
+  openUserList = () => {
+    console.log('click')
+    this.setState({
+      isOpenUserList: true
+    })
+  }
+
   render() {
     return (
-      <Screen title="Home" auth={true}>
+      <Screen handleSos={this.openUserList} title="Home" auth={true}>
+        <UserList isOpen={this.state.isOpenUserList}/>
         <Container style={{ flex: 1 }}>
           {this.getMap()}
         </Container>
@@ -101,6 +111,6 @@ class Home extends Component {
   }
 }
 
-export default connect((state) => ({
-  user: state[moduleName].user
+export default connect((state, ownProps) => ({
+  user: state[moduleName].user,
 }), {})(Home);

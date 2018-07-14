@@ -21,23 +21,27 @@ class Screen extends Component {
   };
 
   render() {
-    const { title, children, auth } = this.props;
-
+    const { title, children, auth, navigation, handleSos } = this.props;
+    console.log('navigation', navigation)
     return (
       <Container style={{flex: 1}}>
         <Header
           auth={auth}
           title={title}
           handleBack={this.handleBack}
+          handleSos={handleSos}
           handleOpenMenu={this.handleOpenMenu}
         />
         { children }
         {
-          auth && <FooterNav />
+          auth && <FooterNav navigation={navigation}/>
         }
       </Container>
     );
   }
 }
 
-export default connect(null, { authFetch })(Screen);
+export default connect((state, ownProps) => ({
+  user: state[moduleName].user,
+  navigation: ownProps.navigation,
+}), { authFetch })(Screen);

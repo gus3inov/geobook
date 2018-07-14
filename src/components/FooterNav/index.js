@@ -18,6 +18,8 @@ class FooterNav extends Component {
   }
 
   render() {
+    const { navigation } = this.props
+
     return (
         <Footer>
           <FooterTab style={styles.container}>
@@ -30,7 +32,7 @@ class FooterNav extends Component {
             <Button active>
               <Icon active name="navigate" />
             </Button>
-            <Button>
+            <Button onPress={() => navigation.navigate('ProfileScreen')}>
               <Icon name="person" />
             </Button>
           </FooterTab>

@@ -58,10 +58,15 @@ class Root extends React.PureComponent {
   };
 
   async componentDidMount() {
+
     try {
       await Font.loadAsync({
         Roboto: require("native-base/Fonts/Roboto.ttf"),
         Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
+
+    if(await AuthService.isAuth()) {
+      this.setState({
+        navigator: this.navigation.home
       });
       if (await AuthService.isAuth()) {
         let user = JSON.parse(await AuthService.getUser());
