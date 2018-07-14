@@ -18,7 +18,7 @@ import styles from "./style";
 import sosImage from "../../../assets/sos-icon.png";
   
 const Header = props => {
-  const { title, handleBack, handleOpenMenu, auth } = props;
+  const { title, handleBack, handleOpenMenu, auth, handleSos } = props;
 
   if(!auth) {
     return (
@@ -44,7 +44,7 @@ const Header = props => {
         </Button>
       </Left>
       <Body>
-        <View>
+        <View onPress={handleSos}>
           <Pulse color="red" />
           <View style={styles.pulseView}>
             <Button transparent style={styles.pulseButton}>

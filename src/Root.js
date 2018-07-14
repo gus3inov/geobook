@@ -22,7 +22,7 @@ class Root extends React.PureComponent {
       'Roboto': require('native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
     });
-    console.log('isAuth', await AuthService.isAuth())
+
     if(await AuthService.isAuth()) {
       this.setState({
         navigator: this.navigation.home
