@@ -63,6 +63,7 @@ class Root extends React.PureComponent {
       await Font.loadAsync({
         Roboto: require("native-base/Fonts/Roboto.ttf"),
         Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
+      })
 
     if(await AuthService.isAuth()) {
       this.setState({
@@ -77,6 +78,7 @@ class Root extends React.PureComponent {
           navigator: this.navigation.home
         });
       }
+    }
       this.setState({ fontLoaded: true });
     } catch (e) {
       console.log(e);
