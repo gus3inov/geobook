@@ -1,5 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
+import { View } from "react-native";
 import {
   Container,
   Header as NativeHeader,
@@ -9,19 +10,15 @@ import {
   Button,
   Icon,
   Text,
-  Title,
-} from 'native-base';
-import { Image } from 'react-native';
-import styles from './style';
-import sosImage from '../../../assets/sos-icon.png'
-
-const Header = (props) => {
-  const {
-    title,
-    handleBack,
-    handleOpenMenu,
-    auth,
-  } = props;
+  Title
+} from "native-base";
+import { Image } from "react-native";
+import Pulse from "../Pulse";
+import styles from "./style";
+import sosImage from "../../../assets/sos-icon.png";
+  
+const Header = props => {
+  const { title, handleBack, handleOpenMenu, auth } = props;
 
   if(!auth) {
     return (
@@ -37,21 +34,34 @@ const Header = (props) => {
 
   return (
     <NativeHeader style={styles.container}>
-      <Left>
+      <Left
+        style={{
+          zIndex: 1
+        }}
+      >
         <Button onPress={handleBack} transparent>
-          <Icon name="arrow-back"/>
+          <Icon name="arrow-back" />
         </Button>
       </Left>
       <Body>
-        <Button style={styles.logoButton}>
-          <Text style={styles.logoText}>
-            { 'SOS' }
-          </Text>
-        </Button>
+        <View>
+          <Pulse color="red" />
+          <View style={styles.pulseView}>
+            <Button transparent style={styles.pulseButton}>
+              <Text style={styles.pulseText}>10</Text>
+            </Button>
+          </View>
+        </View>
       </Body>
       <Right>
         <Button onPress={handleOpenMenu} transparent>
-          <Icon name="menu"/>
+          <Badge primary>
+            <Icon
+              name="star"
+              style={{ fontSize: 15, color: "#fff", lineHeight: 20 }}
+            />
+          </Badge>
+          {/* <Icon name="menu" /> */}
         </Button>
       </Right>
     </NativeHeader>
@@ -61,7 +71,7 @@ const Header = (props) => {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   handleBack: PropTypes.func.isRequired,
-  handleOpenMenu: PropTypes.func.isRequired,
+  handleOpenMenu: PropTypes.func.isRequired
 };
 
 export default Header;
