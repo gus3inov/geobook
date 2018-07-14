@@ -163,12 +163,6 @@ export default class Pulse extends Component {
                                 ]}
                             />
                         )}
-                        {image &&
-                            <Image
-                                style={image.style}
-                                source={image.source}
-                            />
-                        }
                     </View>
                 }
             </View>

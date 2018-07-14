@@ -56,6 +56,7 @@ class Home extends Component {
         <MapView
           style={{flex: 1, height: 700}}
           onLayout={this.onMapLayout}
+          showsUserLocation={true}
           initialRegion={{
             latitude: latitude,
             longitude: longitude,
