@@ -50,7 +50,6 @@ class Home extends Component {
     return new Promise((resolve) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.log('user', this.props.users)
           this.setState({
             defLocation: false,
             latitude: position.coords.latitude,
@@ -111,7 +110,7 @@ class Home extends Component {
                     }}
                 />
                 {
-                    users.map((user, index) => {
+                   users !== null && users.map((user, index) => {
                         return <MapView.Marker
                             key={index}
                             coordinate={{
@@ -130,7 +129,6 @@ class Home extends Component {
 }
 
   openUserList = () => {
-    console.log('click')
     this.setState({
       isOpenUserList: !this.state.isOpenUserList
     })
@@ -138,7 +136,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Screen handleSos={this.openUserList} title="Home" auth={true}>
+      <Screen navigation={this.props.navigation} handleSos={this.openUserList} title="Home" auth={true}>
         <UserList handleOpen={this.openUserList} isOpen={this.state.isOpenUserList}/>
         <Container style={{ flex: 1 }}>
           {this.getMap()}
@@ -150,4 +148,5 @@ class Home extends Component {
 
 export default connect((state, ownProps) => ({
   users: state[userModuleName].data,
+  navigation: ownProps.navigation
 }), { fetchUsers })(Home);

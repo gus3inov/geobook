@@ -36,7 +36,7 @@ export default class Drawer extends Component {
   static defaultProps = {
     isOpen: false,
     header: 'Messages',
-    headerHeight: 70,
+    headerHeight: 75,
     teaserHeight: 75,
   };
 

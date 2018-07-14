@@ -17,22 +17,29 @@ class FooterNav extends Component {
 
   }
 
+  isActive(route, screenName) {
+     if(route === screenName){
+      return true
+     }
+
+    return false
+  }
+
   render() {
     const { navigation } = this.props
-
     return (
         <Footer>
           <FooterTab style={styles.container}>
-            <Button>
+            {/* <Button active={this.isActive(navigation.state.routeName)}>
               <Icon name="apps" />
             </Button>
-            <Button>
+            <Button active={this.isActive(navigation.state.routeName)}>
               <Icon name="camera" />
-            </Button>
-            <Button active>
+            </Button> */}
+            <Button active={this.isActive(navigation.state.routeName, 'HomeScreen')} onPress={() => navigation.navigate('HomeScreen')}>
               <Icon active name="navigate" />
             </Button>
-            <Button onPress={() => navigation.navigate('ProfileScreen')}>
+            <Button active={this.isActive(navigation.state.routeName, 'ProfileScreen')} onPress={() => navigation.navigate('ProfileScreen')}>
               <Icon name="person" />
             </Button>
           </FooterTab>

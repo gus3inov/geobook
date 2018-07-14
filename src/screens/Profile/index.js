@@ -21,6 +21,7 @@ class Profile extends Component {
 
   logout = () => {
       AuthService.deauthenticateUser()
+      this.props.navigation.navigate('AuthorizationScreen')
   }
 
   componentDidMount () {
@@ -29,7 +30,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <Screen navigation={this.props.navigaiton} title="Profile" auth={true}>
+      <Screen navigation={this.props.navigation} title="Profile" auth={true}>
         <Container style={{ flex: 1 }}>
           <Button onPress={this.logout}>
             <Text>

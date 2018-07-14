@@ -22,7 +22,7 @@ class Screen extends Component {
 
   render() {
     const { title, children, auth, navigation, handleSos } = this.props;
-    console.log('navigation', navigation)
+   
     return (
       <Container style={{flex: 1}}>
         <Header

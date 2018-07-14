@@ -69,10 +69,14 @@ export const signIn = (user) => {
         type: SIGN_IN_SUCCESS,
         payload: userData,
       })
-      
-      AuthService.authenticateUser(userData)
-    }).catch(err => {
-      console.error(err)
+      console.log(userData)
+      AuthService.authenticateUser(userData.result)
+    }).catch(error => {
+      console.error(error)
+      dispatch({
+        type: SIGN_IN_SUCCESS,
+        error,
+      })
     })
   };
 }
