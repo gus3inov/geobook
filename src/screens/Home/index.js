@@ -42,8 +42,7 @@ class Home extends Component {
     mapLoaded: false,
     defLocation: true,
     geoDistance: 1,
-    isOpenUserList: false,
-    users: []
+    isOpenUserList: false
   }
 
   componentDidMount () {
@@ -55,8 +54,7 @@ class Home extends Component {
           this.setState({
             defLocation: false,
             latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            users: this.props.users
+            longitude: position.coords.longitude
           })
 
           resolve({
@@ -100,7 +98,7 @@ class Home extends Component {
   }
 
   getMarkers = () => {
-    const { users } = this.state
+    const { users } = this.props
     const {latitude, longitude, mapLoaded} = this.state
 
     if (mapLoaded) {

@@ -1,18 +1,13 @@
 import { AsyncStorage } from 'react-native';
 
 class AuthService {
-    static authenticateUser(token, user) {
-        AsyncStorage.setItem('token', token);
+    static authenticateUser(user) {
         AsyncStorage.setItem('user', JSON.stringify(user));
     }
 
     static async isAuth() {
-        const res = await this.getToken();
-        return res !== null;
-    }
-
-    static async getToken() {
-        return await AsyncStorage.getItem('token');
+        const res = await this.getUser();
+        return res;
     }
 
     static async getUser() {
@@ -20,7 +15,6 @@ class AuthService {
     }
 
     static deauthenticateUser() {
-        AsyncStorage.setItem('token', '');
         AsyncStorage.setItem('user', '');
     }
 }

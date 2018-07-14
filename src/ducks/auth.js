@@ -70,7 +70,7 @@ export const signIn = (user) => {
         payload: userData,
       })
       
-      AuthService.authenticateUser('secret123', userData)
+      AuthService.authenticateUser(userData)
     }).catch(err => {
       console.error(err)
     })
