@@ -8,9 +8,12 @@ import {
   Right,
   Button,
   Icon,
+  Text,
   Title,
 } from 'native-base';
+import { Image } from 'react-native';
 import styles from './style';
+import sosImage from '../../../assets/sos-icon.png'
 
 const Header = (props) => {
   const {
@@ -27,9 +30,11 @@ const Header = (props) => {
         </Button>
       </Left>
       <Body>
-      <Title>
-        {title}
-      </Title>
+        <Button style={styles.logoButton}>
+          <Text style={styles.logoText}>
+            { 'SOS' }
+          </Text>
+        </Button>
       </Body>
       <Right>
         <Button onPress={handleOpenMenu} transparent>
