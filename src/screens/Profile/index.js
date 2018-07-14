@@ -13,6 +13,7 @@ import { MapView } from 'expo'
 import { moduleName } from '../../ducks/auth'
 import AuthService from '../../services/AuthService'
 import Screen from '../../components/Screen';
+import Cabinet from '../../components/Cabinet'
 
 class Profile extends Component {
   state = {
@@ -29,15 +30,14 @@ class Profile extends Component {
   }
 
   render() {
+    const { user, navigation } = this.props
+console.log(user.result[0])
     return (
       <Screen navigation={this.props.navigation} title="Profile" auth={true}>
-        <Container style={{ flex: 1 }}>
-          <Button onPress={this.logout}>
-            <Text>
-              { 'Выйти' }
-            </Text>
-        </Button>
-        </Container>
+        <Cabinet 
+          navigation={navigation}
+          user={user.result[0]}
+        />
       </Screen>
     );
   }

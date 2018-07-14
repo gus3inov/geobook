@@ -70,7 +70,7 @@ export const signIn = (user) => {
         payload: userData,
       })
       console.log(userData)
-      AuthService.authenticateUser(userData.result)
+      AuthService.authenticateUser(userData)
     }).catch(error => {
       console.error(error)
       dispatch({
