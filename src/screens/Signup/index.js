@@ -10,13 +10,17 @@ import Screen from '../../components/Screen';
 import TextField from '../../components/TextField'
 import styles from './styles';
 
-class Login extends Component {
+class Signup extends Component {
+  handleSubmit = () => {
+
+  }
+
   render() {
     const {handleSubmit} = this.props
 
     return (
       <Container>
-        <Form style={styles.form} onSubmit={handleSubmit}>
+        <Form style={styles.form}>
           <Field 
             name="username" 
             label="Логин" 
@@ -28,14 +32,19 @@ class Login extends Component {
             secureTextEntry
             component={TextField} 
           />
+          <Field 
+            name="confirmPassword"
+            label="Повторите пароль"
+            secureTextEntry 
+            component={TextField} 
+          />
         <Button
             style={styles.formSubmit}
-            full
-            action="submit"
             onPress={handleSubmit}
+            full
           >
             <Text>
-              { 'Войти' }
+              { 'Создать аккаунт' }
             </Text>
           </Button>
           </Form>
@@ -45,5 +54,5 @@ class Login extends Component {
 }
 
 export default reduxForm({
-  form: 'auth',
-})(Login);
+  form: 'signup'
+})(Signup);

@@ -19,17 +19,20 @@ class Screen extends Component {
   };
 
   render() {
-    const { title, children } = this.props;
+    const { title, children, auth } = this.props;
 
     return (
       <Container style={{flex: 1}}>
         <Header
+          auth={auth}
           title={title}
           handleBack={this.handleBack}
           handleOpenMenu={this.handleOpenMenu}
         />
         { children }
-        <FooterNav />
+        {
+          auth && <FooterNav />
+        }
       </Container>
     );
   }

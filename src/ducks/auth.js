@@ -1,11 +1,12 @@
-import config from '../../config/app'
+import config from '../../config/app';
+import AuthService from '../services/AuthService';
 
-const { appName } = config;
+const {
+  appName,
+  api
+} = config;
 
 export const moduleName = 'auth';
-export const SIGN_UP_REQUEST = `${appName}/${moduleName}/SIGN_UP_REQUEST`;
-export const SIGN_UP_SUCCESS = `${appName}/${moduleName}/SIGN_UP_SUCCESS`;
-export const SIGN_UP_ERROR = `${appName}/${moduleName}/SIGN_UP_ERROR`;
 
 export const SIGN_IN_REQUEST = `${appName}/${moduleName}/SIGN_IN_REQUEST`;
 export const SIGN_IN_SUCCESS = `${appName}/${moduleName}/SIGN_IN_SUCCESS`;
@@ -19,38 +20,34 @@ const initialState = {
 };
 
 export default function auth(state = initialState, action) {
-  const { type, payload, error, isAuth } = action;
+  const {
+    type,
+    payload,
+    error,
+    isAuth
+  } = action;
 
   switch (type) {
-    case SIGN_UP_REQUEST:
+    case SIGN_IN_REQUEST:
       return {
-        ...state
-      }
-    case SIGN_UP_SUCCESS:
-      return {
-        ...state
+        ...state,
+        loading: true
       }
     case SIGN_IN_SUCCESS:
       return {
-        ...state
+        ...state,
+        isAuth: true,
+        user: payload
       }
-    case SIGN_UP_ERROR:
+    case SIGN_IN_ERROR:
       return {
-        ...state
+        ...state,
+        error,
       }
     default:
       return state;
   }
 }
-
-export const signUp = (user) => {
-  return (dispatch) => {
-    dispatch({
-      type: SIGN_UP_REQUEST
-    });
-
-  };
-};
 
 export const signIn = (user) => {
   return (dispatch) => {
@@ -58,14 +55,24 @@ export const signIn = (user) => {
       type: SIGN_IN_REQUEST,
       isAuth: false
     });
+    console.log(`${api}/api/login`)
+    fetch(`${api}/api/login`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user)
+    }).then(async(res) => {
 
-  };
-};
+      dispatch({
+        type: SIGN_IN_SUCCESS,
+        payload: await res.json(),
+      })
 
-export const isAuthAction = () => {
-  return (dispatch) => {
-    dispatch({
-      type: SIGN_IN_REQUEST
-    });
+      AuthService.authenticateUser('secret123')
+    }).catch(err => {
+      console.error(err)
+    })
   };
-};
+}

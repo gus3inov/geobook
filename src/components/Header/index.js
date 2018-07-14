@@ -16,9 +16,21 @@ import { Image } from "react-native";
 import Pulse from "../Pulse";
 import styles from "./style";
 import sosImage from "../../../assets/sos-icon.png";
-
+  
 const Header = props => {
-  const { title, handleBack, handleOpenMenu } = props;
+  const { title, handleBack, handleOpenMenu, auth } = props;
+
+  if(!auth) {
+    return (
+      <NativeHeader style={styles.container}>
+        <Body>
+          <Title>
+            { title }
+          </Title>
+        </Body>
+      </NativeHeader>
+    );
+  }
 
   return (
     <NativeHeader style={styles.container}>
