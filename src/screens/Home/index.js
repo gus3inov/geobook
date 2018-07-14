@@ -88,7 +88,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Screen title="Home">
+      <Screen title="Home" auth={true}>
         <Container style={{ flex: 1 }}>
           {this.getMap()}
         </Container>

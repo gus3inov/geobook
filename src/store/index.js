@@ -3,8 +3,8 @@ import thunk from 'redux-thunk';
 import reducer from './reducers';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 
-// const enhancer = applyMiddleware(devToolsEnhancer(), thunk);
+const enhancer = applyMiddleware(thunk);
 
-const store = createStore(reducer);
+const store = createStore(reducer, enhancer);
 
 export default store

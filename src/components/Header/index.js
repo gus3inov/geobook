@@ -20,7 +20,20 @@ const Header = (props) => {
     title,
     handleBack,
     handleOpenMenu,
+    auth,
   } = props;
+
+  if(!auth) {
+    return (
+      <NativeHeader style={styles.container}>
+        <Body>
+          <Title>
+            { title }
+          </Title>
+        </Body>
+      </NativeHeader>
+    );
+  }
 
   return (
     <NativeHeader style={styles.container}>
