@@ -62,21 +62,19 @@ class Root extends React.PureComponent {
       await Font.loadAsync({
         Roboto: require("native-base/Fonts/Roboto.ttf"),
         Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
-      })
-      
-    if(await AuthService.isAuth()) {
-      this.setState({
-        navigator: this.navigation.home
       });
+
       if (await AuthService.isAuth()) {
+        this.setState({
+          navigator: this.navigation.home
+        });
         let user = JSON.parse(await AuthService.getUser());
-        await this.register(user.result[0].id);
+        await this.register(user.id);
         this.listener = Expo.Notifications.addListener(this.listen);
         this.setState({
           navigator: this.navigation.home
         });
       }
-    }
       this.setState({ fontLoaded: true });
     } catch (e) {
       console.log(e);
