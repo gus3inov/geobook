@@ -18,7 +18,7 @@ import styles from "./style";
 import sosImage from "../../../assets/sos-icon.png";
   
 const Header = props => {
-  const { title, handleBack, handleOpenMenu, auth, handleSos } = props;
+  const { title, handleBack, handleOpenMenu, auth, handleSos, count } = props;
 
   if(!auth) {
     return (
@@ -48,7 +48,7 @@ const Header = props => {
           <Pulse color="red" />
           <View style={styles.pulseView}>
             <Button onPress={handleSos} transparent style={styles.pulseButton}>
-              <Text style={styles.pulseText}>10</Text>
+              <Text style={styles.pulseText}>{count ? count.length : 10 }</Text>
             </Button>
           </View>
         </View>

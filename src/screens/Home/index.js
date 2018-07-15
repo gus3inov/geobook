@@ -12,13 +12,16 @@ import {
   Col,
   Text
 } from "native-base";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 import { connect } from "react-redux";
 import { MapView } from "expo";
 import { moduleName } from "../../ducks/auth";
-import { moduleName as userModuleName, fetchUsers } from "../../ducks/user";
+import { moduleName as problemModuleName, fetchProblems } from "../../ducks/problem";
 import Screen from "../../components/Screen";
 import UserList from "./UserList";
+import { cardMap } from './styles';
+import CardItem from './CardItem';
+import ProblemDetail from './ProblemDetail'
 
 /**
  * @dev Helper
@@ -51,11 +54,13 @@ class Home extends Component {
     mapLoaded: false,
     defLocation: true,
     geoDistance: 1,
-    isOpenUserList: false
+    isOpenUserList: false,
+    isOpenDetail: false,
+    detailData: null
   };
 
   componentDidMount() {
-    this.props.fetchUsers();
+    this.props.fetchProblems();
     return new Promise(resolve => {
       navigator.geolocation.getCurrentPosition(
         position => {
@@ -99,169 +104,169 @@ class Home extends Component {
         <MapView
           style={{ flex: 1, height: 700 }}
           onLayout={this.onMapLayout}
+          zoom={13}
           showsUserLocation={true}
-          customMapStyle={[
-            {
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#242f3e"
-                }
-              ]
-            },
-            {
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#746855"
-                }
-              ]
-            },
-            {
-              elementType: "labels.text.stroke",
-              stylers: [
-                {
-                  color: "#242f3e"
-                }
-              ]
-            },
-            {
-              featureType: "administrative.locality",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#d59563"
-                }
-              ]
-            },
-            {
-              featureType: "poi",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#d59563"
-                }
-              ]
-            },
-            {
-              featureType: "poi.park",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#263c3f"
-                }
-              ]
-            },
-            {
-              featureType: "poi.park",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#6b9a76"
-                }
-              ]
-            },
-            {
-              featureType: "road",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#38414e"
-                }
-              ]
-            },
-            {
-              featureType: "road",
-              elementType: "geometry.stroke",
-              stylers: [
-                {
-                  color: "#212a37"
-                }
-              ]
-            },
-            {
-              featureType: "road",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#9ca5b3"
-                }
-              ]
-            },
-            {
-              featureType: "road.highway",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#746855"
-                }
-              ]
-            },
-            {
-              featureType: "road.highway",
-              elementType: "geometry.stroke",
-              stylers: [
-                {
-                  color: "#1f2835"
-                }
-              ]
-            },
-            {
-              featureType: "road.highway",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#f3d19c"
-                }
-              ]
-            },
-            {
-              featureType: "transit",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#2f3948"
-                }
-              ]
-            },
-            {
-              featureType: "transit.station",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#d59563"
-                }
-              ]
-            },
-            {
-              featureType: "water",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#17263c"
-                }
-              ]
-            },
-            {
-              featureType: "water",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#515c6d"
-                }
-              ]
-            },
-            {
-              featureType: "water",
-              elementType: "labels.text.stroke",
-              stylers: [
-                {
-                  color: "#17263c"
-                }
-              ]
-            }
-          ]}
-          liteMode={false}
+          // customMapStyle={[
+          //   {
+          //     elementType: "geometry",
+          //     stylers: [
+          //       {
+          //         color: "#242f3e"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     elementType: "labels.text.fill",
+          //     stylers: [
+          //       {
+          //         color: "#746855"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     elementType: "labels.text.stroke",
+          //     stylers: [
+          //       {
+          //         color: "#242f3e"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "administrative.locality",
+          //     elementType: "labels.text.fill",
+          //     stylers: [
+          //       {
+          //         color: "#d59563"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "poi",
+          //     elementType: "labels.text.fill",
+          //     stylers: [
+          //       {
+          //         color: "#d59563"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "poi.park",
+          //     elementType: "geometry",
+          //     stylers: [
+          //       {
+          //         color: "#263c3f"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "poi.park",
+          //     elementType: "labels.text.fill",
+          //     stylers: [
+          //       {
+          //         color: "#6b9a76"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "road",
+          //     elementType: "geometry",
+          //     stylers: [
+          //       {
+          //         color: "#38414e"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "road",
+          //     elementType: "geometry.stroke",
+          //     stylers: [
+          //       {
+          //         color: "#212a37"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "road",
+          //     elementType: "labels.text.fill",
+          //     stylers: [
+          //       {
+          //         color: "#9ca5b3"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "road.highway",
+          //     elementType: "geometry",
+          //     stylers: [
+          //       {
+          //         color: "#746855"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "road.highway",
+          //     elementType: "geometry.stroke",
+          //     stylers: [
+          //       {
+          //         color: "#1f2835"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "road.highway",
+          //     elementType: "labels.text.fill",
+          //     stylers: [
+          //       {
+          //         color: "#f3d19c"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "transit",
+          //     elementType: "geometry",
+          //     stylers: [
+          //       {
+          //         color: "#2f3948"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "transit.station",
+          //     elementType: "labels.text.fill",
+          //     stylers: [
+          //       {
+          //         color: "#d59563"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "water",
+          //     elementType: "geometry",
+          //     stylers: [
+          //       {
+          //         color: "#17263c"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "water",
+          //     elementType: "labels.text.fill",
+          //     stylers: [
+          //       {
+          //         color: "#515c6d"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "water",
+          //     elementType: "labels.text.stroke",
+          //     stylers: [
+          //       {
+          //         color: "#17263c"
+          //       }
+          //     ]
+          //   }
+          // ]}
           initialRegion={{
             latitude: latitude,
             longitude: longitude,
@@ -276,7 +281,7 @@ class Home extends Component {
   };
 
   getMarkers = () => {
-    const { users } = this.props;
+    const { problems } = this.props;
     const { latitude, longitude, mapLoaded } = this.state;
 
     if (mapLoaded) {
@@ -288,24 +293,26 @@ class Home extends Component {
               longitude: parseFloat(longitude)
             }}
           />
-          {users !== null &&
-            users.map((user, index) => {
+          {problems !== null &&
+            problems.map((problem, index) => {
               return (
                 <MapView.Marker
-                  key={index}
+                  key={problem.id}
+                  onPress={() => this.openDetailProblem({
+                    data: problem,
+                    distance: `${getDistanceInKm(latitude, longitude, problem.lat, problem.long)}`
+                  })}
                   coordinate={{
-                    latitude: parseFloat(user.lat),
-                    longitude: parseFloat(user.lng)
+                    latitude: parseFloat(problem.lat),
+                    longitude: parseFloat(problem.lng)
                   }}
                 >
-                  <MapView.Callout>
-                    <Text>{`${getDistanceInKm(
-                      latitude,
-                      longitude,
-                      user.lat,
-                      user.lng
-                    )}`}</Text>
-                  </MapView.Callout>
+                 <View>
+                    <Image
+                        style={{width: 30, height: 30}}
+                        source={require('../../../assets/icon-warning.png')}
+                    />
+                </View>
                 </MapView.Marker>
               );
             })}
@@ -320,7 +327,18 @@ class Home extends Component {
     });
   };
 
+  openDetailProblem = (data) => {
+    console.log('click', data)
+    this.setState({
+      isOpenDetail: true,
+      detailData: data
+    });
+  };
+
   render() {
+    const { detailData } = this.state
+    const { problems } = this.props
+
     return (
       <Screen
         navigation={this.props.navigation}
@@ -328,6 +346,14 @@ class Home extends Component {
         title="Home"
         auth={true}
       >
+        {
+          detailData !== null && 
+          <ProblemDetail 
+            isOpen={this.state.isOpenDetail}
+            data={detailData}
+            handleOpen={() => this.setState({isOpenDetail: false })}
+          />
+        }
         <UserList
           handleOpen={this.openUserList}
           isOpen={this.state.isOpenUserList}
@@ -340,8 +366,8 @@ class Home extends Component {
 
 export default connect(
   (state, ownProps) => ({
-    users: state[userModuleName].data,
+    problems: state[problemModuleName].data,
     navigation: ownProps.navigation
   }),
-  { fetchUsers }
+  { fetchProblems }
 )(Home);

@@ -19,9 +19,10 @@ class Profile extends Component {
 
   render() {
     const { user, navigation } = this.props;
+    console.log('cabinet', user)
     return (
       <Screen navigation={this.props.navigation} title="Profile" auth={true}>
-        <Cabinet navigation={navigation} user={user} />
+        <Cabinet navigation={navigation} user={user.result[0]} />
       </Screen>
     );
   }

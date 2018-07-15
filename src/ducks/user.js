@@ -92,7 +92,7 @@ export const addCoords = (data) => {
   };
 }
 
-export const fetchUsers = (data) => {
+export const fetchUsers = () => {
   return (dispatch) => {
     dispatch({
       type: FETCH_USERS_REQUEST,
